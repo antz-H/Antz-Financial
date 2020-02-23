@@ -9,4 +9,6 @@ public interface IFundCrawlerService {
 
     void fundCrawler();
 
+    long fundDetailCrawler(String fundCode, Integer page, Integer pageSize, long crawlerTimeStamp);
+
 }

@@ -3,6 +3,9 @@ package com.antz.financial.infra.repository;
 import com.antz.financial.domain.Fund;
 import com.antz.financial.infra.repository.mongo.FundMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +28,11 @@ public class FundRepository {
     public List<Fund> fundALLOf() {
         return fundMongoRepository.findAll();
     }
+
+    public Page<Fund> fundByPageOf(Fund fund, Pageable pageable) {
+        Example<Fund> fundExample = Example.of(fund);
+        return fundMongoRepository.findAll(fundExample, pageable);
+    }
+
+
 }

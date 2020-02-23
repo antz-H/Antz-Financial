@@ -29,9 +29,17 @@ public class TTFundCrawler {
 
     public static final String CRAWLER_TT_FUND_URL = "http://fund.eastmoney.com/js/fundcode_search.js";
 
-    public Fund crawlerFundDetailAndParse(String crawlerFundCode, long crawlerTimeStamp) {
-        String crawler_fund_detail = restTemplate.getForObject(StringHelper.StringFormat(CRAWLER_TT_FUND_DETAIL_URL, crawlerFundCode, String.valueOf(crawlerTimeStamp)), String.class);
-        return parseFundDetail(crawler_fund_detail);
+    public Optional<Fund> crawlerFundDetailAndParse(String crawlerFundCode, long crawlerTimeStamp) {
+        String crawler_fund_detail = "";
+        String formatURL = null;
+        try {
+            formatURL = StringHelper.StringFormat(CRAWLER_TT_FUND_DETAIL_URL, crawlerFundCode, String.valueOf(crawlerTimeStamp));
+            crawler_fund_detail = restTemplate.getForObject(formatURL, String.class);
+            return Optional.ofNullable(parseFundDetail(crawler_fund_detail));
+        } catch (Exception e) {
+            log.error("Fund Code :{} crawel url：{}, failed : {}", formatURL, crawlerFundCode, e);
+        }
+        return Optional.ofNullable(null);
     }
 
     public List<Fund> crawlerFundAndParse() {

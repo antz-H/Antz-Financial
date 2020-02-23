@@ -18,5 +18,5 @@ public abstract class AbstractEntity {
     private LocalDateTime lastModifiedDate;
 
     @Version
-    private long verion;
+    private Long version;
 }

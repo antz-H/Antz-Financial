@@ -15,6 +15,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.System.out;
 
@@ -45,7 +46,7 @@ public class TTFundCrawlerTest {
     @Test
     public void testCrawlerAndParse() {
         TTFundCrawler fundCrawler = new TTFundCrawler();
-        Fund fund = fundCrawler.crawlerFundDetailAndParse("519983", 20200219155842L);
+        Optional<Fund> fund = fundCrawler.crawlerFundDetailAndParse("519983", 20200219155842L);
         out.println(fund);
     }
 
