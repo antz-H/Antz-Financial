@@ -1,8 +1,8 @@
 package com.antz.financial.crawler;
 
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class CrawlerTest {
 
     String originalStr;
 
-    @BeforeEach
+    @Before
     public void setup() throws IOException {
         InputStream inputStream = this.getClass().getResourceAsStream("DayFund_demo.txt");
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);

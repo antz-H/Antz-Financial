@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author antz-H
@@ -29,7 +30,11 @@ public class FundRepository {
         return fundMongoRepository.findAll();
     }
 
-    public Page<Fund> fundByPageOf(Fund fund, Pageable pageable) {
+    public Optional<Fund> fundOfByCode(String fundCode) {
+        return fundMongoRepository.findById(fundCode);
+    }
+
+    public Page<Fund> fundOfByPage(Fund fund, Pageable pageable) {
         Example<Fund> fundExample = Example.of(fund);
         return fundMongoRepository.findAll(fundExample, pageable);
     }

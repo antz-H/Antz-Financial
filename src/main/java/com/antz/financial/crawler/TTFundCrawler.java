@@ -128,7 +128,7 @@ public class TTFundCrawler {
         if (stringOptional.isPresent()) {
             String[] keyValues = stringOptional.get().split(TT_FUND_KEY_WORLD.DH);
             if (keyValues.length > 1) {
-                fund.setCode(keyValues[1]);
+                fund.setCode(keyValues[1].replaceAll("\"", "").trim());
             }
         }
     }
@@ -138,7 +138,7 @@ public class TTFundCrawler {
         if (stringOptional.isPresent()) {
             String[] keyValues = stringOptional.get().split(TT_FUND_KEY_WORLD.DH);
             if (keyValues.length > 1) {
-                fund.setName(keyValues[1]);
+                fund.setName(keyValues[1].replaceAll("\"", "").trim());
             }
         }
     }

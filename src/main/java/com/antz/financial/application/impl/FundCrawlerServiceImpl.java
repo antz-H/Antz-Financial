@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
 import java.util.List;
@@ -38,14 +37,14 @@ public class FundCrawlerServiceImpl implements IFundCrawlerService {
         fundRepository.saveAll(funds);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public long fundDetailCrawler(String fundCode, Integer page, Integer pageSize, long crawlerTimeStamp) {
-        Page<Fund> fundPage = fundRepository.fundByPageOf(
+        Page<Fund> fundPage = fundRepository.fundOfByPage(
                 Fund.builder()
                         .code(fundCode)
                         .build(),
                 PageRequest.of(page, pageSize));
+
         if (!fundPage.isEmpty()) {
             List<Fund> saveFunds = Lists.newArrayList();
             fundPage.getContent().forEach(fund -> {
